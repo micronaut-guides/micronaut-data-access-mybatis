@@ -40,6 +40,11 @@ dependencies {
     compile "io.micronaut:http-client"
     compile "io.micronaut:http-server-netty"
     compileOnly "io.micronaut:inject-java"
+
+    compile 'org.mybatis:mybatis:3.4.6'
+    compile "io.micronaut.configuration:jdbc-hikari"
+    runtime "com.h2database:h2:1.4.196"
+
     runtime "ch.qos.logback:logback-classic:1.2.3"
     testCompile "junit:junit:4.12"
     testCompile "io.micronaut:inject-java"
