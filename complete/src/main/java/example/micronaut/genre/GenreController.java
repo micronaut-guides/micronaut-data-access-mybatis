@@ -53,9 +53,12 @@ public class GenreController {
                             @Nullable Integer max,
                             @Nullable String sort,
                             @Nullable String order) {
+
         PaginationArguments paginationArguments = new PaginationArguments(offset != null ? offset : 0,
                 max != null ? max : applicationConfiguration.getMax());
-        SortingArguments sortingArguments = sort != null ? new SortingArguments(sort, SortingOrder.of(order)) : null;
+
+        String sortingParam = sort != null ? sort : "id";
+        SortingArguments sortingArguments = new SortingArguments(sortingParam, SortingOrder.of(order));
 
         return genreRepository.findAll(paginationArguments, sortingArguments);
     }
