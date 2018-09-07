@@ -41,6 +41,10 @@ dependencies {
     compile "io.micronaut:http-server-netty"
     compileOnly "io.micronaut:inject-java"
 
+    //tag::validator[]
+    compile "io.micronaut.configuration:hibernate-validator"
+    //end::validator[]
+
     compile 'org.mybatis:mybatis:3.4.6'
     compile "io.micronaut.configuration:jdbc-hikari"
     runtime "com.h2database:h2:1.4.196"
