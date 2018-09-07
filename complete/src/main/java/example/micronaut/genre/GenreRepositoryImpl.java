@@ -31,6 +31,7 @@ public class GenreRepositoryImpl implements GenreRepository {
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
             GenreRepository genreMapper = sqlSession.getMapper(GenreRepository.class);
             genreMapper.save(genre);
+            sqlSession.commit();
         }
     }
 
@@ -39,6 +40,7 @@ public class GenreRepositoryImpl implements GenreRepository {
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
             GenreRepository genreMapper = sqlSession.getMapper(GenreRepository.class);
             genreMapper.deleteById(id);
+            sqlSession.commit();
         }
     }
 
@@ -47,6 +49,7 @@ public class GenreRepositoryImpl implements GenreRepository {
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
             GenreRepository genreMapper = sqlSession.getMapper(GenreRepository.class);
             genreMapper.update(id, name);
+            sqlSession.commit();
         }
     }
 
