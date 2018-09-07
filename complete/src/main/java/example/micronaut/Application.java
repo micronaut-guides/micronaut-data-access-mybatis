@@ -32,7 +32,6 @@ public class Application {
             Reader reader = Resources.getResourceAsReader("schema.sql");
 
             ScriptRunner runner = new ScriptRunner(conn);
-            runner.setErrorLogWriter(null);
             runner.runScript(reader);
             conn.commit();
             reader.close();
