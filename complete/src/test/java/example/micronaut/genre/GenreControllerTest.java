@@ -25,10 +25,7 @@ public class GenreControllerTest {
 
     @BeforeClass
     public static void setupServer() {
-        server = ApplicationContext
-                .build()
-                .packages("example.micronaut.domain") // <3>
-                .run(EmbeddedServer.class);
+        server = ApplicationContext.run(EmbeddedServer.class); // <1>
         client = server.getApplicationContext().createBean(HttpClient.class, server.getURL()); // <2>
     }
 
@@ -47,22 +44,22 @@ public class GenreControllerTest {
 
         List<Long> genreIds = new ArrayList<>();
 
-        HttpRequest request = HttpRequest.POST("/genres", new GenreSaveCommand("DevOps")); // <4>
+        HttpRequest request = HttpRequest.POST("/genres", new GenreSaveCommand("DevOps")); // <3>
         HttpResponse response = client.toBlocking().exchange(request);
         genreIds.add(entityId(response));
 
         assertEquals(HttpStatus.CREATED, response.getStatus());
 
-        request = HttpRequest.POST("/genres", new GenreSaveCommand("Microservices")); // <5>
+        request = HttpRequest.POST("/genres", new GenreSaveCommand("Microservices")); // <4>
         response = client.toBlocking().exchange(request);
 
         assertEquals(HttpStatus.CREATED, response.getStatus());
 
         Long id = entityId(response);
         genreIds.add(id);
-        request = HttpRequest.GET("/genres/"+id);
+        request = HttpRequest.GET("/genres/" + id);
 
-        Genre genre = client.toBlocking().retrieve(request, Genre.class); // <4>
+        Genre genre = client.toBlocking().retrieve(request, Genre.class); // <5>
 
         assertEquals("Microservices", genre.getName());
 
@@ -99,7 +96,7 @@ public class GenreControllerTest {
 
         // cleanup:
         for (Long genreId : genreIds) {
-            request = HttpRequest.DELETE("/genres/"+genreId);
+            request = HttpRequest.DELETE("/genres/" + genreId);
             response = client.toBlocking().exchange(request);
             assertEquals(HttpStatus.NO_CONTENT, response.getStatus());
         }
@@ -108,11 +105,11 @@ public class GenreControllerTest {
     protected Long entityId(HttpResponse response) {
         String path = "/genres/";
         String value = response.header(HttpHeaders.LOCATION);
-        if ( value == null) {
+        if (value == null) {
             return null;
         }
         int index = value.indexOf(path);
-        if ( index != -1) {
+        if (index != -1) {
             return Long.valueOf(value.substring(index + path.length()));
         }
         return null;
