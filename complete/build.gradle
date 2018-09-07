@@ -46,9 +46,11 @@ dependencies {
     compile "io.micronaut.configuration:hibernate-validator"
     //end::validator[]
 
-    compile 'org.mybatis:mybatis:3.4.6'
-    compile "io.micronaut.configuration:jdbc-hikari"
-    runtime "com.h2database:h2:1.4.196"
+    //tag::mybatis[]
+    compile 'org.mybatis:mybatis:3.4.6' // <1>
+    compile "io.micronaut.configuration:jdbc-hikari" // <2>
+    runtime "com.h2database:h2:1.4.196" // <3>
+    //end::mybatis[]
 
     runtime "ch.qos.logback:logback-classic:1.2.3"
     testCompile "junit:junit:4.12"

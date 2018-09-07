@@ -1,0 +1,40 @@
+=== Data Source configuration
+
+Add the next snippet to `build.gradle` to include the necessary dependencies:
+
+[source,groovy]
+.build.gradle
+----
+include::{sourceDir}/build.gradle[tag=mybatis,indent=0]
+----
+
+<1> Add MyBatis dependency.
+<2> Configures SQL DataSource instances using Hikari Connection Pool.
+<3> Add dependency to in-memory H2 Database.
+
+Define the data source in `src/main/resources/application.yml`.
+
+[source,yml]
+.src/main/resources/application.yml
+----
+include::{sourceDir}/src/main/resources/application.yml[tag=datasource]
+----
+
+=== MyBatis configuration
+
+As there is not out-of-the-box support yet in Micronaut for MyBatis it is necessary to wire manually `SqlSessionFactory`.
+
+Create the following https://docs.micronaut.io/latest/guide/index.html#factories[@Factory] file `src/main/java/example/micronaut/MybatisFactory.java`:
+
+[source,java]
+.src/main/java/example/micronaut/MybatisFactory.java
+----
+include::{sourceDir}/src/main/java/example/micronaut/MybatisFactory.java[]
+----
+
+<1> Annotate the class with `@Factory`.
+<2> Constructor injection for Micronaut's `dataSource`.
+<3> Define a `@Bean` of type `SqlSessionFactory`.
+<4> Use the `dataSource` to create a new MyBatis environment.
+<5> Define the package to scan for mappers.
+<6> Create a new `SqlSessionFactory` bean.

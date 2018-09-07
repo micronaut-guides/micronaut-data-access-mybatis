@@ -1,0 +1,7 @@
+Create the domain entities:
+
+[source,java]
+.src/main/java/example/micronaut/domain/Genre.java
+----
+include::{sourceDir}/src/main/java/example/micronaut/domain/Genre.java[]
+----

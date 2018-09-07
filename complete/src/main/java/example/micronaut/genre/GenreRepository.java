@@ -25,7 +25,7 @@ public interface GenreRepository {
     void deleteById(long id);
 
     @Update("update genre set name=#{name} where id=#{id}")
-    void update(long id, String name);
+    void update(@Param("id") long id, @Param("name") String name);
 
     @Select("select * from genre order by ${sorting.sort} ${sorting.order} limit ${pagination.offset}, ${pagination.max}")
     List<Genre> findAll(@Param("pagination") PaginationArguments paginationArgs, @Param("sorting") SortingArguments sortingArgs);

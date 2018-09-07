@@ -9,20 +9,20 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import javax.inject.Singleton;
 import java.util.List;
 
-@Singleton
+@Singleton // <1>
 public class GenreRepositoryImpl implements GenreRepository {
 
-    private final SqlSessionFactory sqlSessionFactory;
+    private final SqlSessionFactory sqlSessionFactory; // <2>
 
     public GenreRepositoryImpl(SqlSessionFactory sqlSessionFactory) {
-        this.sqlSessionFactory = sqlSessionFactory;
+        this.sqlSessionFactory = sqlSessionFactory; // <2>
     }
 
     @Override
     public Genre findById(long id) {
-        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-            GenreRepository genreMapper = sqlSession.getMapper(GenreRepository.class);
-            return genreMapper.findById(id);
+        try (SqlSession sqlSession = sqlSessionFactory.openSession()) { // <3>
+            GenreRepository genreMapper = sqlSession.getMapper(GenreRepository.class); // <4>
+            return genreMapper.findById(id); // <5>
         }
     }
 
@@ -31,7 +31,7 @@ public class GenreRepositoryImpl implements GenreRepository {
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
             GenreRepository genreMapper = sqlSession.getMapper(GenreRepository.class);
             genreMapper.save(genre);
-            sqlSession.commit();
+            sqlSession.commit(); // <6>
         }
     }
 
