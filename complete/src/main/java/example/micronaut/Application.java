@@ -1,9 +1,8 @@
 package example.micronaut;
 
-import io.micronaut.aop.Adapter;
-import io.micronaut.context.event.ApplicationEventListener;
 import io.micronaut.context.event.StartupEvent;
 import io.micronaut.runtime.Micronaut;
+import io.micronaut.runtime.event.annotation.EventListener;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.jdbc.ScriptRunner;
 
@@ -25,8 +24,8 @@ public class Application {
         Micronaut.run(Application.class);
     }
 
-    @Adapter(ApplicationEventListener.class)
-    void onStartup(StartupEvent event) {
+    @EventListener
+    public void onStartup(StartupEvent event) {
         try {
             Connection conn = dataSource.getConnection();
             Reader reader = Resources.getResourceAsReader("schema.sql");
