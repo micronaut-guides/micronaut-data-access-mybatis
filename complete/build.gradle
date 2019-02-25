@@ -34,7 +34,7 @@ dependencies {
     compile "io.micronaut:micronaut-validation"
 
     //tag::validator[]
-    compile "io.micronaut.configuration:hibernate-validator"
+    compile "io.micronaut.configuration:micronaut-hibernate-validator"
     //end::validator[]
 
     compile "io.micronaut:micronaut-runtime"
@@ -43,7 +43,7 @@ dependencies {
 
     //tag::mybatis[]
     compile 'org.mybatis:mybatis:3.4.6' // <1>
-    compile "io.micronaut.configuration:jdbc-hikari" // <2>
+    compile "io.micronaut.configuration:micronaut-jdbc-hikari" // <2>
     runtime "com.h2database:h2:1.4.196" // <3>
     //end::mybatis[]
 
