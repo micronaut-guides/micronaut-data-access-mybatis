@@ -1,1 +1,23 @@
 include::{commondir}/common-runapp.adoc[]
+
+We can use `curl` to check that everything works as expected:
+
+[source,bash]
+----
+$ curl http://localhost:8080/genres/list
+[]
+
+$ curl -X POST -d '{"name":"Sci-fi"}' -H "Content-Type: application/json" http://localhost:8080/genres
+{"id":1,"name":"Sci-fi"}
+
+$ curl -X POST -d '{"name":"Science"}' -H "Content-Type: application/json" http://localhost:8080/genres
+{"id":2,"name":"Science"}
+
+$ curl http://localhost:8080/genres/list
+[{"id":1,"name":"Sci-fi"},{"id":2,"name":"Science"}]
+
+$ curl -X DELETE http://localhost:8080/genres/1
+
+$ curl http://localhost:8080/genres/list
+[{"id":2,"name":"Science"}]
+----

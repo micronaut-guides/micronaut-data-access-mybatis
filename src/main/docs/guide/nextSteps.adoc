@@ -1,1 +1,2 @@
-Read more about https://docs.micronaut.io/snapshot/guide/index.html#dataAccess[Configurations for Data Access] section in the micronaut documentation.
+Read more about https://docs.micronaut.io/latest/guide/index.html#dataAccess[Configurations for Data Access] section and
+https://micronaut-projects.github.io/micronaut-flyway/latest/guide/index.html[Flyway] support in the Micronaut documentation.

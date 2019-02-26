@@ -8,6 +8,7 @@ writingTheApp:
   domain: Domain
   repository: Repository Access
   controller: Controller
+  dbschema: DB Schema
   tests: Tests
 runningTheApp: Running the app
 nextSteps:

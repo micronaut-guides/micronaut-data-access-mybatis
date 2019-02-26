@@ -9,3 +9,9 @@ datasources:
         password: ""
         driverClassName: org.h2.Driver
 #end::datasource[]
+#tag::flyway[]
+flyway:
+    datasources:
+        default:
+            locations: classpath:databasemigrations
+#end::flyway[]

@@ -1,0 +1,30 @@
+Now that Mybatis is setup we need a way to create the database schema. For that we will use
+https://micronaut-projects.github.io/micronaut-flyway/latest/guide/index.html[Micronaut integration with
+Flyway].
+
+
+Add the next snippet to `build.gradle` to include the necessary dependencies:
+
+[source,groovy]
+.build.gradle
+----
+include::{sourceDir}/build.gradle[tag=flyway,indent=0]
+----
+
+Configure the database migrations directory for Flyway in `application.yml`.
+
+[source,yml]
+.src/main/resources/application.yml
+----
+include::{sourceDir}/src/main/resources/application.yml[tag=flyway]
+----
+
+Create the file `V1__schema.sql` with the database schema creation:
+
+[source]
+.src/main/resources/databasemigrations/V1__schema.sql
+----
+include::{sourceDir}/src/main/resources/databasemigrations/V1__schema.sql[]
+----
+
+During application startup Flyway will execute the sql file and create the schema needed for the application.
