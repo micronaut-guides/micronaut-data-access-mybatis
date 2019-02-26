@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import example.micronaut.domain.Genre;
+import example.micronaut.genre.GenreSaveCommand;
+import example.micronaut.genre.GenreUpdateCommand;
 import io.micronaut.core.type.Argument;
 import io.micronaut.http.HttpHeaders;
 import io.micronaut.http.HttpRequest;
@@ -21,12 +23,12 @@ import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
-@MicronautTest
+@MicronautTest // <1>
 public class GenreControllerTest {
 
     @Inject
     @Client("/")
-    public RxHttpClient client;
+    public RxHttpClient client; // <2>
 
     @Test
     public void supplyAnInvalidOrderTriggersValidationFailure() {

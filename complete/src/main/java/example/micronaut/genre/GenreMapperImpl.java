@@ -60,7 +60,8 @@ public class GenreMapperImpl implements GenreMapper {
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
             GenreMapper genreMapper = sqlSession.getMapper(GenreMapper.class);
             return genreMapper.findAll();
-        }    }
+        }
+    }
 
     @Override
     public List<Genre> findAllBySortAndOrder(@NotNull @Pattern(regexp = "id|name") String sort,
@@ -68,7 +69,8 @@ public class GenreMapperImpl implements GenreMapper {
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
             GenreMapper genreMapper = sqlSession.getMapper(GenreMapper.class);
             return genreMapper.findAllBySortAndOrder(sort, order);
-        }    }
+        }
+    }
 
     @Override
     public List<Genre> findAllByOffsetAndMaxAndSortAndOrder(@NotNull @PositiveOrZero Integer offset,

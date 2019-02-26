@@ -22,7 +22,7 @@ include::{sourceDir}/src/main/resources/application.yml[tag=datasource]
 
 === MyBatis configuration
 
-As there is not out-of-the-box support yet in Micronaut for MyBatis it is necessary to wire manually `SqlSessionFactory`.
+As there is no out-of-the-box support yet in Micronaut for MyBatis it is necessary to wire manually `SqlSessionFactory`.
 
 Create the following https://docs.micronaut.io/latest/guide/index.html#factories[@Factory] file `src/main/java/example/micronaut/MybatisFactory.java`:
 

@@ -1,5 +1,6 @@
-package example.micronaut;
+package example.micronaut.genre;
 
+import example.micronaut.ListingArguments;
 import example.micronaut.domain.Genre;
 
 import javax.validation.constraints.NotBlank;

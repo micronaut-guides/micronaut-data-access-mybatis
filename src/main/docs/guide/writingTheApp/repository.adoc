@@ -2,17 +2,17 @@ Create an interface to define the operations to access the database and use MyBa
 to sql queries:
 
 [source,java]
-.src/main/java/example/micronaut/genre/GenreRepository.java
+.src/main/java/example/micronaut/genre/GenreMapper.java
 ----
-include::{sourceDir}/src/main/java/example/micronaut/genre/GenreRepository.java[]
+include::{sourceDir}/src/main/java/example/micronaut/genre/GenreMapper.java[]
 ----
 
 And the implementation:
 
 [source,java]
-.src/main/java/example/micronaut/genre/GenreRepositoryImpl.java
+.src/main/java/example/micronaut/genre/GenreMapperImpl.java
 ----
-include::{sourceDir}/src/main/java/example/micronaut/genre/GenreRepositoryImpl.java[]
+include::{sourceDir}/src/main/java/example/micronaut/genre/GenreMapperImpl.java[]
 ----
 
 <1> Use `javax.inject.Singleton` to designate a class a a singleton.
@@ -21,3 +21,20 @@ include::{sourceDir}/src/main/java/example/micronaut/genre/GenreRepositoryImpl.j
 <4> Get MyBatis mapper implementation for the interface.
 <5> Execute the desired method using the mapper. This will trigger the sql query.
 <6> In a database write access, commit the transaction.
+
+
+Create an interface to define the high level operations exposed to the application:
+
+[source,java]
+.src/main/java/example/micronaut/genre/GenreRepository.java
+----
+include::{sourceDir}/src/main/java/example/micronaut/genre/GenreRepository.java[]
+----
+
+And the implementation using `GenreMapper`:
+
+[source,java]
+.src/main/java/example/micronaut/genre/GenreRepositoryImpl.java
+----
+include::{sourceDir}/src/main/java/example/micronaut/genre/GenreRepositoryImpl.java[]
+----

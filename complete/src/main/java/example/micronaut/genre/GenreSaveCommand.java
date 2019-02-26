@@ -1,4 +1,4 @@
-package example.micronaut;
+package example.micronaut.genre;
 
 import javax.validation.constraints.NotBlank;
 import java.util.Objects;

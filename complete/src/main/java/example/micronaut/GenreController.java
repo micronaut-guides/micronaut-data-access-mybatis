@@ -1,6 +1,9 @@
 package example.micronaut;
 
 import example.micronaut.domain.Genre;
+import example.micronaut.genre.GenreRepository;
+import example.micronaut.genre.GenreSaveCommand;
+import example.micronaut.genre.GenreUpdateCommand;
 import io.micronaut.http.HttpHeaders;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.Body;

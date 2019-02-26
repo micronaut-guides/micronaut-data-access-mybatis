@@ -14,25 +14,13 @@ include::{sourceDir}/src/main/java/example/micronaut/genre/GenreSaveCommand.java
 include::{sourceDir}/src/main/java/example/micronaut/genre/GenreUpdateCommand.java[]
 ----
 
-Create several POJOs to encapsulate Sorting and Pagination:
+Create a POJO to encapsulate Sorting and Pagination:
 
 
 [source,java]
-.src/main/java/example/micronaut/SortingOrder.java
+.src/main/java/example/micronaut/ListingArguments.java
 ----
-include::{sourceDir}/src/main/java/example/micronaut/SortingOrder.java[]
-----
-
-[source,java]
-.src/main/java/example/micronaut/SortingArguments.java
-----
-include::{sourceDir}/src/main/java/example/micronaut/SortingArguments.java[]
-----
-
-[source,java]
-.src/main/java/example/micronaut/PaginationArguments.java
-----
-include::{sourceDir}/src/main/java/example/micronaut/PaginationArguments.java[]
+include::{sourceDir}/src/main/java/example/micronaut/ListingArguments.java[]
 ----
 
 Create a `ConfigurationProperties` object to encapsulate the configuration of the default `max` value.
@@ -52,9 +40,9 @@ include::{sourceDir}/src/main/java/example/micronaut/ApplicationConfigurationPro
 Create `GenreController`, a controller which exposes a resource with the common CRUD operations:
 
 [source,java]
-.src/main/java/example/micronaut/genre/GenreController.java
+.src/main/java/example/micronaut/GenreController.java
 ----
-include::{sourceDir}/src/main/java/example/micronaut/genre/GenreController.java[]
+include::{sourceDir}/src/main/java/example/micronaut/GenreController.java[]
 ----
 
 <1> Add `@Validated` annotation at the class level to any class that requires validation.
