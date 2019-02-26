@@ -15,7 +15,7 @@ public class ApplicationConfigurationProperties implements ApplicationConfigurat
     }
 
     public void setMax(Integer max) {
-        if(max != null) {
+        if (max != null) {
             this.max = max;
         }
     }
