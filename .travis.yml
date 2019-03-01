@@ -1,9 +1,14 @@
 sudo: false
 cache:
   directories:
-    - "$HOME/.gradle"
+  - "$HOME/.gradle"
 jdk:
-  - oraclejdk8
+- oraclejdk8
 script:
-  - if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then bash ./travis-build-pr.sh; fi
-  - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash ./travis-build.sh; fi
+- if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then bash ./travis-build-pr.sh; fi
+- if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash ./travis-build.sh; fi
+env:
+  global:
+  - secure: ky8IIJkLgs5WvA+xVhu1BILg5O7StGjdAH7+J1QCb5na1tPYiB37X2ShwJYwR/7sTdXe3DLpp3cUiBBicQsTFxZ69ita7zthcZM1YV4U1JfdMbFuoTYKc415h8I/NR5KVvrhBkpl6Y+koSycJzPmxb5izUpIwGevf2AX5TOH0txn05PvfF3YGVELl0AFgt8F5TaStEkh16on15sMcJeHp2ywABlxSD1knPHvQFeU21GxbnPVAQHMJS6Zs+U1+x95HPRVwZ2cFnNrUPNO/vScLb/cGjHnntCbSBhjv9p5rhp9hQy7VDzzlNAingeUg0ttga+3W3F9aWIOrWFtgQpoXjLE7ZeH+NTmCzDTFETiUhJpkmwMy8d0cR69kq/0t7VR+OySR6259nOBblpSBILdSp/j4H/O+aoBHyRWfWp+pJENhy7FqkVx/knf4NUfnjBdObYXDN0fXomNaSun6JaYtJKaNJ83ui/A0XkDVEz1SRHe81YuhmMOWiDhKX5NSshfxxLveXZubsEXuxMD2COa7GMpUfFb57e8Rgq8f3llKsnYyZMZ0jEXX/YCgiRPxPnwNaSkIAeHcWTabmMWz5dctyu0lYov2A4mbGYV79pAaKjrxqPkV3yY45j7KARCBmvgjG23YhXZ7ywr0ru83+DHJVi3B4P4sfczJRMrxqY9ID0=
+  - secure: QgXlF3rARNYU7S6q1tOGVICgX3EIvAl1rZggpkbaamx5Wf9jhs0HqjyOBmp0pYSoGnbZolO0CPDGaDONkn4Tl2ABj8osYtSm5XwAUMyY1/MHNQHLMlLePsPoIcEXV2i1qcPaFxEpyYibdQD8XltzkBhhbcfY6d5gVkZOWBNFoO4xQP17gI9cEJ/Yzbr4oCOQRR/AZkTQMMJv6rSqK7UU+vGaMzoFrF6jAmQprtKou64+k8XEBFKkWyGNrg5uktvoPg6ivq604HdkDy1hAWYtsIXVtBJKzdhso+t64z+vDGqFMkF7YegaVT0sqowivVM3M1vMxSlY7Zh1qzxVRLd1pf2OH+7uK0gsEy2MiQmpp12xY5ZbVYudQ6Sfp6fYx3mXXOyEB9hR51RiJjQh+5HWcXxmYvUsw5xRAM5eR1WpQCB0l8ZSwMWhWlYsNkrMsgxxjgOEGHmp+3jg8JJCiWZH+3zQz+F7ac85chTiORm8vALzhL5YDnPvLRWP+09LtN5r1lsC2zYkaNFmz1hZZkn9GQ+fDjYNGbtmoD8aEpb6RNClIdnhlpasAbdk6OeLOoiWp5DoCXKNiR7Tt3JOwE684juZX+iY93XJvBzfgs9Ag8Nz6rKI/wtLlcbN+gOiyqXhEKnz5bRNez6o7YZhUWY+P+gwCRmi7PgZ7vcQ2/ztWiY=
+  - secure: qP+HyJt6DHxwtpA2NpTYUs1tmekfAAIte/UbMi805lHZtJtnf2dAq21IQhVhNC4JyQbW4Q3w+f9eEgYuVUb7l2RWEO9nIzwN7UEDq+tFV4sqeD7bSBSjybMMrTu5KICePpf75EeZPeiti5NNmyyF5T2ecHX30XZpEj/GPtsCb3L7tYb2ODk8MqUN6IpFJMw6LloC+/nKUZkXwgdMf2BPsFP0O5vaMyNIhX6znmkgcmnGrgKWOHsL1CB6TfhVia78hKV5syJMUYoL1DGsQ9XNxJwRBzcLVTcuN100kM9/CeSZ0t0QP5PfhmAIqGRekQBiW4Zkgi26Q6IeM3EpPR6OaEDcTEzbSYnUqmkyZCjeBRbZ8aDwYc/iM5+knwHXGTOU0qsPTfFucw+Wd+x7iV+EqESpNNQyvB8KWGf/Vg3BZHIbrASWfJq8P86p+ZTNvC/r8B759Y5X0zp/toC5fUcHyV5ek2S/AunD33icqlA8YWEYf1Cy0h8KTzq/Yrru9zQQhdsV/vN9gCdMEXcLd8OLiLXPiDQmv8eLuN8JnU9E+chdgWowr6PKOpX+UU2zP5aNXe1ZWnukdEuGN4sueDA37SZ+i1nnslB1kJ4nmHoJwamL+GOwNiOo2mdfQ7OAH+ppTjYqWxi8ahcV+uQ9JbKhEfV4j0niKqB4XDrasGqy0hA=
