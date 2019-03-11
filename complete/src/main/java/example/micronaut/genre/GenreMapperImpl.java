@@ -23,16 +23,19 @@ public class GenreMapperImpl implements GenreMapper {
     @Override
     public Genre findById(long id) {
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) { // <3>
-            GenreMapper genreMapper = sqlSession.getMapper(GenreMapper.class); // <4>
-            return genreMapper.findById(id); // <5>
+            return getGenreMapper(sqlSession).findById(id); // <5>
         }
     }
+
+    private GenreMapper getGenreMapper(SqlSession sqlSession) {
+        return sqlSession.getMapper(GenreMapper.class); // <4>
+    }
+
 
     @Override
     public void save(Genre genre) {
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-            GenreMapper genreMapper = sqlSession.getMapper(GenreMapper.class);
-            genreMapper.save(genre);
+            getGenreMapper(sqlSession).save(genre);
             sqlSession.commit(); // <6>
         }
     }
@@ -40,8 +43,7 @@ public class GenreMapperImpl implements GenreMapper {
     @Override
     public void deleteById(long id) {
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-            GenreMapper genreMapper = sqlSession.getMapper(GenreMapper.class);
-            genreMapper.deleteById(id);
+            getGenreMapper(sqlSession).deleteById(id);
             sqlSession.commit();
         }
     }
@@ -49,8 +51,7 @@ public class GenreMapperImpl implements GenreMapper {
     @Override
     public void update(long id, String name) {
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-            GenreMapper genreMapper = sqlSession.getMapper(GenreMapper.class);
-            genreMapper.update(id, name);
+            getGenreMapper(sqlSession).update(id, name);
             sqlSession.commit();
         }
     }
@@ -58,8 +59,7 @@ public class GenreMapperImpl implements GenreMapper {
     @Override
     public List<Genre> findAll() {
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-            GenreMapper genreMapper = sqlSession.getMapper(GenreMapper.class);
-            return genreMapper.findAll();
+            return getGenreMapper(sqlSession).findAll();
         }
     }
 
@@ -67,8 +67,7 @@ public class GenreMapperImpl implements GenreMapper {
     public List<Genre> findAllBySortAndOrder(@NotNull @Pattern(regexp = "id|name") String sort,
                                              @NotNull @Pattern(regexp = "asc|ASC|desc|DESC") String order) {
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-            GenreMapper genreMapper = sqlSession.getMapper(GenreMapper.class);
-            return genreMapper.findAllBySortAndOrder(sort, order);
+            return getGenreMapper(sqlSession).findAllBySortAndOrder(sort, order);
         }
     }
 
@@ -78,8 +77,7 @@ public class GenreMapperImpl implements GenreMapper {
                                                             @NotNull @Pattern(regexp = "id|name") String sort,
                                                             @NotNull @Pattern(regexp = "asc|ASC|desc|DESC") String order) {
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-            GenreMapper genreMapper = sqlSession.getMapper(GenreMapper.class);
-            return genreMapper.findAllByOffsetAndMaxAndSortAndOrder(offset, max, sort, order);
+            return getGenreMapper(sqlSession).findAllByOffsetAndMaxAndSortAndOrder(offset, max, sort, order);
         }
     }
 
@@ -87,8 +85,7 @@ public class GenreMapperImpl implements GenreMapper {
     public List<Genre> findAllByOffsetAndMax(@NotNull @PositiveOrZero Integer offset,
                                              @Positive @NotNull Integer max) {
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-            GenreMapper genreMapper = sqlSession.getMapper(GenreMapper.class);
-            return genreMapper.findAllByOffsetAndMax(offset, max);
+            return getGenreMapper(sqlSession).findAllByOffsetAndMax(offset, max);
         }
     }
 }
