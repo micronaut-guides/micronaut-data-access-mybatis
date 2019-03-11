@@ -2,6 +2,7 @@ package example.micronaut.genre;
 
 import example.micronaut.ListingArguments;
 import example.micronaut.domain.Genre;
+import io.micronaut.validation.Validated;
 
 import javax.inject.Singleton;
 import javax.validation.constraints.NotBlank;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Singleton // <1>
+@Validated
 public class GenreRepositoryImpl implements GenreRepository {
 
     private final GenreMapper genreMapper;
