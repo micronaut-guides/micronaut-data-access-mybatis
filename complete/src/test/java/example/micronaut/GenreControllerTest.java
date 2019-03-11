@@ -13,12 +13,12 @@ import io.micronaut.http.HttpHeaders;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.HttpStatus;
+import io.micronaut.http.client.BlockingHttpClient;
 import io.micronaut.http.client.RxHttpClient;
 import io.micronaut.http.client.annotation.Client;
 import io.micronaut.http.client.exceptions.HttpClientResponseException;
 import io.micronaut.test.annotation.MicronautTest;
 import org.junit.jupiter.api.Test;
-
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +28,16 @@ public class GenreControllerTest {
 
     @Inject
     @Client("/")
-    public RxHttpClient client; // <2>
+    public RxHttpClient rxHttpClient; // <2>
+
+    BlockingHttpClient getClient() {
+        return rxHttpClient.toBlocking();
+    }
 
     @Test
     public void supplyAnInvalidOrderTriggersValidationFailure() {
         assertThrows(HttpClientResponseException.class, () -> {
-            List<Genre> genres = client.toBlocking().retrieve(HttpRequest.GET("/genres/list?order=foo"), Argument.of(List.class, Genre.class));
+            List<Genre> genres = getClient().retrieve(HttpRequest.GET("/genres/list?order=foo"), Argument.of(List.class, Genre.class));
 
             assertNotNull(genres);
             assertEquals(0, genres.size());
@@ -43,7 +47,7 @@ public class GenreControllerTest {
     @Test
     public void testFindNonExistingGenreReturns404() {
         assertThrows(HttpClientResponseException.class, () -> {
-            Genre genre = client.toBlocking().retrieve(HttpRequest.GET("/genres/99"), Argument.of(Genre.class));
+            Genre genre = getClient().retrieve(HttpRequest.GET("/genres/99"), Argument.of(Genre.class));
 
             assertNull(genre);
         });
@@ -55,13 +59,13 @@ public class GenreControllerTest {
         List<Long> genreIds = new ArrayList<>();
 
         HttpRequest request = HttpRequest.POST("/genres", new GenreSaveCommand("DevOps")); // <3>
-        HttpResponse response = client.toBlocking().exchange(request);
+        HttpResponse response = getClient().exchange(request);
         genreIds.add(entityId(response));
 
         assertEquals(HttpStatus.CREATED, response.getStatus());
 
         request = HttpRequest.POST("/genres", new GenreSaveCommand("Microservices")); // <3>
-        response = client.toBlocking().exchange(request);
+        response = getClient().exchange(request);
 
         assertEquals(HttpStatus.CREATED, response.getStatus());
 
@@ -69,45 +73,45 @@ public class GenreControllerTest {
         genreIds.add(id);
         request = HttpRequest.GET("/genres/" + id);
 
-        Genre genre = client.toBlocking().retrieve(request, Genre.class); // <4>
+        Genre genre = getClient().retrieve(request, Genre.class); // <4>
 
         assertEquals("Microservices", genre.getName());
 
         request = HttpRequest.PUT("/genres", new GenreUpdateCommand(id, "Micro-services"));
-        response = client.toBlocking().exchange(request);  // <5>
+        response = getClient().exchange(request);  // <5>
 
         assertEquals(HttpStatus.NO_CONTENT, response.getStatus());
 
         request = HttpRequest.GET("/genres/" + id);
-        genre = client.toBlocking().retrieve(request, Genre.class);
+        genre = getClient().retrieve(request, Genre.class);
         assertEquals("Micro-services", genre.getName());
 
         request = HttpRequest.GET("/genres/list");
-        List<Genre> genres = client.toBlocking().retrieve(request, Argument.of(List.class, Genre.class));
+        List<Genre> genres = getClient().retrieve(request, Argument.of(List.class, Genre.class));
 
         assertEquals(2, genres.size());
 
         request = HttpRequest.GET("/genres/list?max=1");
-        genres = client.toBlocking().retrieve(request, Argument.of(List.class, Genre.class));
+        genres = getClient().retrieve(request, Argument.of(List.class, Genre.class));
 
         assertEquals(1, genres.size());
         assertEquals("DevOps", genres.get(0).getName());
 
         request = HttpRequest.GET("/genres/list?max=1&order=desc&sort=name");
-        genres = client.toBlocking().retrieve(request, Argument.of(List.class, Genre.class));
+        genres = getClient().retrieve(request, Argument.of(List.class, Genre.class));
 
         assertEquals(1, genres.size());
         assertEquals("Micro-services", genres.get(0).getName());
 
         request = HttpRequest.GET("/genres/list?max=1&offset=10");
-        genres = client.toBlocking().retrieve(request, Argument.of(List.class, Genre.class));
+        genres = getClient().retrieve(request, Argument.of(List.class, Genre.class));
 
         assertEquals(0, genres.size());
 
         // cleanup:
         for (Long genreId : genreIds) {
             request = HttpRequest.DELETE("/genres/" + genreId);
-            response = client.toBlocking().exchange(request);
+            response = getClient().exchange(request);
             assertEquals(HttpStatus.NO_CONTENT, response.getStatus());
         }
     }
