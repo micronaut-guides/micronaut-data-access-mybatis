@@ -43,7 +43,7 @@ dependencies {
     compile "io.micronaut:micronaut-http-server-netty"
 
     //tag::mybatis[]
-    compile 'org.mybatis:mybatis:3.4.6' // <1>
+    compile 'org.mybatis:mybatis:3.5.1' // <1>
     compile "io.micronaut.configuration:micronaut-jdbc-hikari" // <2>
     runtime "com.h2database:h2:1.4.196" // <3>
     //end::mybatis[]
