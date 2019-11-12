@@ -1,71 +1,57 @@
 plugins {
-    id "io.spring.dependency-management" version "1.0.6.RELEASE"
-    id "com.github.johnrengelman.shadow" version "4.0.2"
+    id "net.ltgt.apt-eclipse" version "0.21"
+    id "com.github.johnrengelman.shadow" version "5.0.0"
     id "application"
-    id "java"
-    id "net.ltgt.apt-eclipse" version "0.20"
-    id "net.ltgt.apt-idea" version "0.20"
 }
 
 version "0.1"
 group "example.micronaut"
 
 repositories {
-    mavenLocal()
     mavenCentral()
-    maven { url "https://jcenter.bintray.com" }
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-}
-
-dependencyManagement {
-    imports {
-        mavenBom "io.micronaut:micronaut-bom:$micronautVersion"
-    }
+    jcenter()
 }
 
 configurations {
     // for dependencies that are needed for development only
-    developmentOnly 
+    developmentOnly
 }
 
 dependencies {
+    annotationProcessor platform("io.micronaut:micronaut-bom:$micronautVersion")
     annotationProcessor "io.micronaut:micronaut-inject-java"
     annotationProcessor "io.micronaut:micronaut-validation"
-    compile "io.micronaut:micronaut-inject"
-    compile "io.micronaut:micronaut-validation"
+    implementation platform("io.micronaut:micronaut-bom:$micronautVersion")
+    implementation "io.micronaut:micronaut-inject"
+    implementation "io.micronaut:micronaut-validation"
+    implementation "io.micronaut:micronaut-runtime"
+    implementation "io.micronaut:micronaut-http-server-netty"
+    implementation "io.micronaut:micronaut-http-client"
 
     //tag::validator[]
-    compile "io.micronaut.configuration:micronaut-hibernate-validator"
+    implementation 'io.micronaut:micronaut-validation'
     //end::validator[]
 
-    compile "io.micronaut:micronaut-runtime"
-    compile "io.micronaut:micronaut-http-client"
-    compile "io.micronaut:micronaut-http-server-netty"
-
     //tag::mybatis[]
-    compile 'org.mybatis:mybatis:3.4.6' // <1>
-    compile "io.micronaut.configuration:micronaut-jdbc-hikari" // <2>
+    implementation 'org.mybatis:mybatis:3.4.6' // <1>
+    implementation "io.micronaut.configuration:micronaut-jdbc-hikari" // <2>
     runtime "com.h2database:h2:1.4.196" // <3>
     //end::mybatis[]
 
     //tag::flyway[]
-    compile 'io.micronaut.configuration:micronaut-flyway'
+    implementation 'io.micronaut.configuration:micronaut-flyway'
     //end::flyway[]
 
-    runtime "ch.qos.logback:logback-classic:1.2.3"
+    runtimeOnly "ch.qos.logback:logback-classic:1.2.3"
+    testAnnotationProcessor platform("io.micronaut:micronaut-bom:$micronautVersion")
     testAnnotationProcessor "io.micronaut:micronaut-inject-java"
-    testCompile "org.junit.jupiter:junit-jupiter-api"
-    testCompile "io.micronaut.test:micronaut-test-junit5"
-    testRuntime "org.junit.jupiter:junit-jupiter-engine"
+    testImplementation platform("io.micronaut:micronaut-bom:$micronautVersion")
+    testImplementation "org.junit.jupiter:junit-jupiter-api"
+    testImplementation "io.micronaut.test:micronaut-test-junit5"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
 }
 
-shadowJar {
-    mergeServiceFiles()
-}
-
-run.classpath += configurations.developmentOnly
 test.classpath += configurations.developmentOnly
-run.jvmArgs('-noverify', '-XX:TieredStopAtLevel=1')
 
 mainClassName = "example.micronaut.Application"
 // use JUnit 5 platform
@@ -76,5 +62,12 @@ tasks.withType(JavaCompile){
     options.encoding = "UTF-8"
     options.compilerArgs.add('-parameters')
 }
+
+shadowJar {
+    mergeServiceFiles()
+}
+
+run.classpath += configurations.developmentOnly
+run.jvmArgs('-noverify', '-XX:TieredStopAtLevel=1', '-Dcom.sun.management.jmxremote')
 
 apply from: "${rootProject.projectDir}/gradle/testVerbose.gradle"
