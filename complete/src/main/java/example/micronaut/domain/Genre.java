@@ -1,11 +1,13 @@
 package example.micronaut.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.micronaut.core.annotation.Introspected;
 
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
+@Introspected
 public class Genre {
 
     public Genre() {

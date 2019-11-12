@@ -1,5 +1,6 @@
 package example.micronaut;
 
+import io.micronaut.core.annotation.Introspected;
 import io.micronaut.http.uri.UriBuilder;
 
 import javax.annotation.Nullable;
@@ -11,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+@Introspected
 public class ListingArguments {
     @PositiveOrZero
     private Integer offset = 0;

@@ -1,8 +1,11 @@
 package example.micronaut.genre;
 
+import io.micronaut.core.annotation.Introspected;
+
 import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
+@Introspected
 public class GenreSaveCommand {
 
     @NotBlank

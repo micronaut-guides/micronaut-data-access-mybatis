@@ -1,7 +1,10 @@
 package example.micronaut.domain;
 
+import io.micronaut.core.annotation.Introspected;
+
 import javax.validation.constraints.NotNull;
 
+@Introspected
 public class Book {
 
     public Book() {
