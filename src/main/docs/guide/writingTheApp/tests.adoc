@@ -8,7 +8,6 @@ include::{sourceDir}/src/test/java/example/micronaut/GenreControllerTest.java[]
 
 <1> Use Micronaut testing integration with JUnit 5.
 <2> Inject a `RxHttpClient`.
-
 <3> Creating HTTP Requests is easy thanks to Micronaut's fluid API.
 <4> If you care just about the object in the response use `retrieve`.
 <5> Sometimes, receiving just the object is not enough and you need information about the response. In this case,

@@ -108,7 +108,7 @@ public class GenreControllerTest {
     private List<Genre> listGenres(ListingArguments args) {
         URI uri = args.of(UriBuilder.of("/genres/list"));
         HttpRequest request = HttpRequest.GET(uri);
-        return getClient().retrieve(request, Argument.of(List.class, Genre.class));
+        return getClient().retrieve(request, Argument.of(List.class, Genre.class)); // <4>
     }
 
     private Genre show(Long id) {
@@ -119,7 +119,7 @@ public class GenreControllerTest {
 
     private HttpResponse update(Long id, String name) {
         HttpRequest request = HttpRequest.PUT("/genres", new GenreUpdateCommand(id, name));
-        return getClient().exchange(request);
+        return getClient().exchange(request); // <5>
     }
 
     private HttpResponse delete(Long id) {
