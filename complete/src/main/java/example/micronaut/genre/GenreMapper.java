@@ -34,13 +34,13 @@ public interface GenreMapper {
 
     @Select("select * from genre order by ${sort} ${order}")
     List<Genre> findAllBySortAndOrder(@NotNull @Pattern(regexp = "id|name") String sort,
-                                             @NotNull @Pattern(regexp = "asc|ASC|desc|DESC") String order);
+                                      @NotNull @Pattern(regexp = "asc|ASC|desc|DESC") String order);
 
     @Select("select * from genre order by ${sort} ${order} limit ${offset}, ${max}")
     List<Genre> findAllByOffsetAndMaxAndSortAndOrder(@NotNull @PositiveOrZero Integer offset,
-                                                            @Positive @NotNull Integer max,
-                                                            @NotNull @Pattern(regexp = "id|name") String sort,
-                                                            @NotNull @Pattern(regexp = "asc|ASC|desc|DESC") String order);
+                                                     @Positive @NotNull Integer max,
+                                                     @NotNull @Pattern(regexp = "id|name") String sort,
+                                                     @NotNull @Pattern(regexp = "asc|ASC|desc|DESC") String order);
 
     @Select("select * from genre limit ${offset}, ${max}")
     List<Genre> findAllByOffsetAndMax(@NotNull @PositiveOrZero Integer offset, @Positive @NotNull Integer max);

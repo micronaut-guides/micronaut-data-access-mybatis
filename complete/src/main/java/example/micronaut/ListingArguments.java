@@ -8,12 +8,11 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import java.net.URI;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 @Introspected
 public class ListingArguments {
+
     @PositiveOrZero
     private Integer offset = 0;
 

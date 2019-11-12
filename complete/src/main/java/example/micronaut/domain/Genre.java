@@ -51,13 +51,10 @@ public class Genre {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Genre{");
-        sb.append("id=");
-        sb.append(id);
-        sb.append(", name='");
-        sb.append(name);
-        sb.append("'}");
-        return sb.toString();
+        return "Genre{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", books=" + books +
+                '}';
     }
 }

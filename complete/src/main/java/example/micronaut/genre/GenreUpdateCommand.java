@@ -1,16 +1,21 @@
 package example.micronaut.genre;
 
+import io.micronaut.core.annotation.Introspected;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+@Introspected
 public class GenreUpdateCommand {
+
     @NotNull
     private Long id;
 
     @NotBlank
     private String name;
 
-    public GenreUpdateCommand() {}
+    public GenreUpdateCommand() {
+    }
 
     public GenreUpdateCommand(Long id, String name) {
         this.id = id;

@@ -35,8 +35,6 @@ public class GenreRepositoryImpl implements GenreRepository {
         findById(id).ifPresent(genre -> genreMapper.deleteById(id));
     }
 
-    private final static List<String> VALID_PROPERTY_NAMES = Arrays.asList("id", "name");
-
     public List<Genre> findAll(@NotNull ListingArguments args) {
 
         if (args.getMax().isPresent() && args.getSort().isPresent() && args.getOffset().isPresent() && args.getSort().isPresent()) {
