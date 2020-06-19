@@ -1,5 +1,6 @@
 package example.micronaut.genre;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import io.micronaut.core.annotation.Introspected;
 
 import javax.validation.constraints.NotBlank;
@@ -8,20 +9,22 @@ import javax.validation.constraints.NotBlank;
 public class GenreSaveCommand {
 
     @NotBlank
+    @NonNull
     private String name;
 
     public GenreSaveCommand() {
     }
 
-    public GenreSaveCommand(String name) {
+    public GenreSaveCommand(@NonNull @NotBlank String name) {
         this.name = name;
     }
 
+    @NonNull
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(@NonNull String name) {
         this.name = name;
     }
 }

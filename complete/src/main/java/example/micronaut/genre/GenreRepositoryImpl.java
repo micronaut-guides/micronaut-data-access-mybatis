@@ -1,5 +1,6 @@
 package example.micronaut.genre;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import example.micronaut.ListingArguments;
 import example.micronaut.domain.Genre;
 
@@ -19,23 +20,26 @@ public class GenreRepositoryImpl implements GenreRepository {
     }
 
     @Override
-    public Optional<Genre> findById(@NotNull Long id) {
+    @NonNull
+    public Optional<Genre> findById(@NonNull @NotNull Long id) {
         return Optional.ofNullable(genreMapper.findById(id));
     }
 
     @Override
-    public Genre save(@NotBlank String name) {
+    @NonNull
+    public Genre save(@NonNull @NotBlank String name) {
         Genre genre = new Genre(name);
         genreMapper.save(genre);
         return genre;
     }
 
     @Override
-    public void deleteById(@NotNull Long id) {
+    public void deleteById(@NonNull @NotNull Long id) {
         findById(id).ifPresent(genre -> genreMapper.deleteById(id));
     }
 
-    public List<Genre> findAll(@NotNull ListingArguments args) {
+    @NonNull
+    public List<Genre> findAll(@NonNull @NotNull ListingArguments args) {
 
         if (args.getMax().isPresent() && args.getSort().isPresent() && args.getOffset().isPresent() && args.getSort().isPresent()) {
             return genreMapper.findAllByOffsetAndMaxAndSortAndOrder(args.getOffset().get(),
@@ -55,7 +59,7 @@ public class GenreRepositoryImpl implements GenreRepository {
     }
 
     @Override
-    public int update(@NotNull Long id, @NotBlank String name) {
+    public int update(@NonNull @NotNull Long id, @NonNull @NotBlank String name) {
         genreMapper.update(id, name);
         return -1;
     }

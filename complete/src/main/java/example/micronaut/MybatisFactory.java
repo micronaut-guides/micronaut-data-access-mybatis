@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 
+import javax.inject.Singleton;
 import javax.sql.DataSource;
 
 @Factory // <1>
@@ -20,8 +21,8 @@ public class MybatisFactory {
         this.dataSource = dataSource; // <2>
     }
 
-    @Bean // <3>
-    SqlSessionFactory sqlSessionFactory() {
+    @Singleton // <3>
+    public SqlSessionFactory sqlSessionFactory() {
         TransactionFactory transactionFactory = new JdbcTransactionFactory();
 
         Environment environment = new Environment("dev", transactionFactory, dataSource); // <4>

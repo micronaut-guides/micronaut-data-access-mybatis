@@ -1,5 +1,6 @@
 package example.micronaut.genre;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import example.micronaut.ListingArguments;
 import example.micronaut.domain.Genre;
 
@@ -10,13 +11,16 @@ import java.util.Optional;
 
 public interface GenreRepository {
 
-    Optional<Genre> findById(@NotNull Long id);
+    @NonNull
+    Optional<Genre> findById(@NonNull @NotNull Long id);
 
-    Genre save(@NotBlank String name);
+    @NonNull
+    Genre save(@NonNull @NotBlank String name);
 
-    void deleteById(@NotNull Long id);
+    void deleteById(@NonNull @NotNull Long id);
 
-    List<Genre> findAll(@NotNull ListingArguments args);
+    @NonNull
+    List<Genre> findAll(@NonNull @NotNull ListingArguments args);
 
-    int update(@NotNull Long id, @NotBlank String name);
+    int update(@NonNull @NotNull Long id, @NonNull @NotBlank String name);
 }

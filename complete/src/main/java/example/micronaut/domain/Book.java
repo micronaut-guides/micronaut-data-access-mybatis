@@ -1,5 +1,7 @@
 package example.micronaut.domain;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
+import edu.umd.cs.findbugs.annotations.Nullable;
 import io.micronaut.core.annotation.Introspected;
 
 import javax.validation.constraints.NotNull;
@@ -7,46 +9,52 @@ import javax.validation.constraints.NotNull;
 @Introspected
 public class Book {
 
-    public Book() {
-    }
-
-    public Book(@NotNull String isbn, @NotNull String name, Genre genre) {
-        this.isbn = isbn;
-        this.name = name;
-        this.genre = genre;
-    }
-
+    @Nullable
     private Long id;
 
+    @NonNull
     @NotNull
     private String name;
 
+    @NonNull
     @NotNull
     private String isbn;
 
     private Genre genre;
 
+    public Book() {
+    }
+
+    public Book(@NonNull @NotNull String isbn, @NonNull @NotNull String name, Genre genre) {
+        this.isbn = isbn;
+        this.name = name;
+        this.genre = genre;
+    }
+
+    @Nullable
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(@Nullable Long id) {
         this.id = id;
     }
 
+    @NonNull
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(@NonNull String name) {
         this.name = name;
     }
 
+    @NonNull
     public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(String isbn) {
+    public void setIsbn(@NonNull String isbn) {
         this.isbn = isbn;
     }
 

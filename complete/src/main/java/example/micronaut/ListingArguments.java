@@ -1,9 +1,9 @@
 package example.micronaut;
 
+import edu.umd.cs.findbugs.annotations.Nullable;
 import io.micronaut.core.annotation.Introspected;
 import io.micronaut.http.uri.UriBuilder;
 
-import javax.annotation.Nullable;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
@@ -33,10 +33,7 @@ public class ListingArguments {
     }
 
     public Optional<Integer> getOffset() {
-        if (offset == null) {
-            return Optional.empty();
-        }
-        return Optional.of(offset);
+        return Optional.ofNullable(offset);
     }
 
     public void setOffset(@Nullable Integer offset) {
@@ -44,10 +41,7 @@ public class ListingArguments {
     }
 
     public Optional<Integer> getMax() {
-        if (max == null) {
-            return Optional.empty();
-        }
-        return Optional.of(max);
+        return Optional.ofNullable(max);
     }
 
     public void setMax(@Nullable Integer max) {
@@ -55,10 +49,7 @@ public class ListingArguments {
     }
 
     public Optional<String> getSort() {
-        if (sort == null) {
-            return Optional.empty();
-        }
-        return Optional.of(sort);
+        return Optional.ofNullable(sort);
     }
 
     public void setSort(@Nullable String sort) {
@@ -66,10 +57,7 @@ public class ListingArguments {
     }
 
     public Optional<String> getOrder() {
-        if (order == null) {
-            return Optional.empty();
-        }
-        return Optional.of(order);
+        return Optional.ofNullable(order);
     }
 
     public void setOrder(@Nullable String order) {

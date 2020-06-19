@@ -1,8 +1,11 @@
 package example.micronaut;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
+
 import javax.validation.constraints.NotNull;
 
 public interface ApplicationConfiguration {
 
-    @NotNull Integer getMax();
+    @NonNull
+    Integer getMax();
 }
